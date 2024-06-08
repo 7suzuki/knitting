@@ -28,3 +28,9 @@
   * フレームワーク: Ruby on Rails
   * JSライブラリ: jQuery
   * IDE: Cloud9
+  
+  ## 使用素材
+  後ほど作成予定
+
+  ## 実装機能リスト
+  https://docs.google.com/spreadsheets/d/16867Evvo5BNz03wsXwpDkVPzN8RPP-JGJUJ-gSqJMnY/edit#gid=885378170
