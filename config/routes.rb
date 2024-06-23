@@ -1,3 +1,28 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :admins, controllers: {
+    sessions: "admins/sessions"
+  }
+
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions"
+  }
+  
+  get "about" => "homes#about" ,as: "about"
+
+  resources :posts
+  resources :users, only: [:show, :edit, :update, :destroy] do
+    collection do #collectionだとidが不要
+      get :mypage
+    end
+  end
+
+  namespace :admin do
+    resources :posts, only: [:index, :show, :destroy]
+    resources :users, only: [:index, :show, :destroy] do
+      resources :comments, controller: :user_comments
+    end
+
+    resources :comments
+  end
 end
