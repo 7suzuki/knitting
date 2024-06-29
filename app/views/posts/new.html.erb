@@ -9,9 +9,10 @@
 <!--下記コマンドでエラーになるけど-->
 <!--多分メンターさんが入れたから重要なやつ-->
 
-<!--$ rails generate migration AddUserRefToPosts user:references-->
-<!--class AddUserRefToPosts < ActiveRecord::Migration[6.1]-->
-<!--  def change-->
-<!--    add_reference :posts, :user, null: false, foreign_key: true-->
-<!--  end-->
-<!--end-->
+
+$ rails generate migration AddUserRefToPosts user:references
+class AddUserRefToPosts < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :posts, :user, null: false, foreign_key: true
+  end
+end
