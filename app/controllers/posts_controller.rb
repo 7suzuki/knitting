@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-
+    # キーワード検索
     if params[:body].present?
-      @posts = @posts.where(body: params[:body])
+      @posts = @posts.where(body: params[:body])# 完全一致
+      # 曖昧検索もwhereを使う
     end
   end
 
