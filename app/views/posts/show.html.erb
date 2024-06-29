@@ -1,5 +1,10 @@
 <h1>投稿詳細</h1>
-<p><%= @post.body %></p>
+<%= @post.body %>
+<% if @post.image.present? %>
+  <%= image_tag @post.image %>
+  <% else %>
+  <p></p>
+<% end %>
 
 <% if @post.user == current_user %>
   <%= link_to "編集", edit_post_path(@post) %>
