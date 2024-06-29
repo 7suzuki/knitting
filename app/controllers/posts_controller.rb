@@ -1,13 +1,4 @@
 class PostsController < ApplicationController
-  def index
-    @posts = Post.all
-    @user = current_user
-    # キーワード検索
-    if params[:body].present?
-      @posts = @posts.where(body: params[:body]) # 完全一致
-      # @posts = @posts.where("body LIKE ?", "%#{params[:body]}%") # 曖昧検索もwhereを使う
-    end
-  end
 
   def new
     @post = Post.new
@@ -25,12 +16,24 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def index
+    @posts = Post.all
+    @user = current_user
+    # キーワード検索
+    if params[:body].present?
+      @posts = @posts.where(body: params[:body]) # 完全一致
+      # @posts = @posts.where("body LIKE ?", "%#{params[:body]}%") # 曖昧検索もwhereを使う
+    end
+  end
+  
   def edit
-
+    @post = Post.find(params[:id])
   end
 
   def update
-
+    post = Post.find(params[:id])
+    post.update(post_params)
+    redirect_to post_path (post)
   end
 
   def destroy
