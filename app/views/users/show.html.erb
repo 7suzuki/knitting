@@ -1,7 +1,6 @@
-ユーザーページ
-
-ユーザーID　の投稿一覧→これで＝マイページ
-
+<h1><%= @user.name %>さんのページ</h1>
+<h5>自己紹介</h5>
+<%= @user.comment %>
 
 <!--マイページのとき編集できる-->
 <% if @user == current_user %>
@@ -12,3 +11,28 @@
 <!--いいね一覧-->
 <!--フォロー一覧-->
 <!--フォロワー一覧-->
+
+<h2>投稿一覧</h2>
+<table>
+  <thead>
+    <tr>
+      <th>投稿内容</th>
+      <th>投稿者</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.body %></td>
+      <td><%= link_to @user.name, user_path(@user.id) %></td>
+      <td>
+        <% if @user == current_user %>
+          <%= link_to "編集", edit_post_path(post) %>
+          <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
