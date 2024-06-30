@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   
-  get "about" => "homes#about" ,as: "about"
+  root to: "homes#top"
 
   resources :posts
   resources :users, only: [:show, :edit, :update, :destroy] do
