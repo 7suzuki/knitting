@@ -16,7 +16,7 @@
         <% if post.image.attached? %>
           <%= image_tag post.image, size: "100x100" %>
         <% else %>
-          <%= image_tag "no_image", size: "100x100" %>
+          <%= image_tag "no_image.jpg", size: "100x100" %>
         <% end %>
       </td>
       <td><%= link_to @user.name, user_path(@user.id) %></td>
