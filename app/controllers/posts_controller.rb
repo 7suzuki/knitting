@@ -2,7 +2,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @user = current_user
   end
 
   def create
@@ -18,14 +17,13 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    @user = current_user
     # キーワード検索
     if params[:body].present?
-      @posts = @posts.where(body: params[:body]) # 完全一致
-      # @posts = @posts.where("body LIKE ?", "%#{params[:body]}%") # 曖昧検索もwhereを使う
+      # @posts = @posts.where(body: params[:body]) # 完全一致
+      @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索もwhereを使う
     end
   end
-  
+
   def edit
     @post = Post.find(params[:id])
   end

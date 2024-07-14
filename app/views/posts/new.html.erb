@@ -10,9 +10,9 @@
 
 <% if @post.errors.any? %>
   <%= @post.errors.count %> errors prohibited this obj from being saved:
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
       <li><%= message %></li>
-        <% end %>
-      </ul>
+    <% end %>
+  </ul>
 <% end %>
