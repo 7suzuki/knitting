@@ -7,10 +7,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to post_path(@post.id)
+    if @post.save
+      redirect_to post_path(@post.id)
+    else
+      render :new
+    end
   end
-
+  
   def show
     @post = Post.find(params[:id])
   end
@@ -26,22 +29,45 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    unless @post.user.id == current_user.id
+      redirect_to user_path alert: "他のユーザーの投稿は編集できません"
+    end
   end
 
   def update
     post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to post_path (post.id)
+    if @post.user == current_user
+      if @post.update(post_params)
+        redirect_to post_path(@post), notice: "投稿が更新されました"
+      else
+        render :edit
+      end
+    else
+      redirect_to posts_path, alert: "他のユーザーの投稿は編集できません"
+    end
   end
 
   def destroy
+    if @post.user == current_user
+      @post.destroy
+      redirect_to posts_path, notice: "投稿が削除されました"
+    else
+      redirect_to posts_path, alert: "他のユーザーの投稿は削除できません"
+    end
+  end
+  def destroy
     post = Post.find(params[:id])
+    if @user.id != current_user.id
+      redirect_to user_path(current_user) and return
+    end
     post.destroy
     redirect_to posts_path, notice: "投稿が削除されました"
   end
 
   private
+  
   def post_params
     params.require(:post).permit(:body, :image)
   end
+  
 end

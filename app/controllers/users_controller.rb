@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     if @user.id != current_user.id
       redirect_to user_path(current_user) and return
     end
-
     if @user.update(user_params)
       redirect_to mypage_users_path notice: "プロフィールが更新されました"
     else

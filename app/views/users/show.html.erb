@@ -1,10 +1,9 @@
 <h1><%= @user.name %>さんのページ</h1>
-<h5>自己紹介</h5>
 <%= @user.comment %>
 
 <!--マイページのとき編集できる-->
 <% if @user == current_user %>
-  <%= link_to "編集", edit_user_path(current_user.id) %>
+  <%= link_to "マイページ編集", edit_user_path(current_user.id) %>
 <% end %>
 <br>
 <%= link_to "投稿フォーム", new_post_path %>
