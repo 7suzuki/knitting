@@ -11,6 +11,9 @@ default: &default
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
   additional_paths: []
+  
+  # Resolved paths for custom imports
+  resolved_paths: ['stylesheets']
 
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false

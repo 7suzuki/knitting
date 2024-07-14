@@ -7,7 +7,7 @@
   <%= link_to "編集", edit_user_path(current_user.id) %>
 <% end %>
 <br>
-<%= link_to '投稿フォーム', new_post_path %>
+<%= link_to "投稿フォーム", new_post_path %>
 
 <!--実装フェーズ3で作成-->
 <!--いいね一覧-->
@@ -30,7 +30,7 @@
         <% if post.image.attached? %>
           <%= image_tag post.image, size: "100x100" %>
         <% else %>
-          <%= image_tag 'no_image', size: "100x100" %>
+          <%= image_tag "no_image", size: "100x100" %>
         <% end %>
       </td>
       <td>

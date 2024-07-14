@@ -6,8 +6,8 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width,initial-scale=1 maximum-scale=1">
     <script src="https://kit.fontawesome.com/2b6ceaf15c.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
   </head>
 
   <body class="d-flex flex-column vh-100">
@@ -22,23 +22,23 @@
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to '投稿フォーム', new_post_path, class: 'nav-link text-light' %>
+                <%= link_to "投稿フォーム", new_post_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to '投稿一覧', posts_path, class: 'nav-link text-light' %>
+                <%= link_to "投稿一覧", posts_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'マイページ', mypage_users_path, class: 'nav-link text-light' %>
+                <%= link_to "マイページ", mypage_users_path, class: "nav-link text-light" %>
               </li>
               <% else %>
               <li class="nav-item">
-                <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>
+                <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light' %>
+                <%= link_to "ログイン", new_user_session_path, class: "nav-link text-light" %>
               </li>
             <% end %>
             </ul>
@@ -54,7 +54,7 @@
         <div class="row no-gutters">
           <div class="col-md-4">
             <p>編み物好きのためのSNS</p>
-            <!--画像あとで探す%= image_tag('logo-white.png') %>-->
+            <!--画像あとで探す%= image_tag("logo-white.png") %>-->
           </div>
         </div>
       </div>
