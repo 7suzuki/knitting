@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   
   root to: "homes#top"
 
-  resources :posts
+  resources :posts do
+    resources :post_comments, only: [:create, :destroy]
+  end
   resources :users, only: [:show, :edit, :update, :destroy] do
     collection do #collectionだとidが不要
       get :mypage

@@ -20,6 +20,7 @@
         <% end %>
       </td>
       <td><%= link_to post.user.name, user_path(post.user) %></td>
+      <td><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
       <td>
         <% if post.user == current_user %>
           <%= link_to "編集", edit_post_path(post) %>
