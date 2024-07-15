@@ -13,29 +13,32 @@ class PostsController < ApplicationController
       render :new
     end
   end
-  
+
   def show
     @post = Post.find(params[:id])
   end
 
   def index
     @posts = Post.all
-    # キーワード検索
+  end
+  
+  def search
+    @posts = Post.all
     if params[:body].present?
       # @posts = @posts.where(body: params[:body]) # 完全一致
-      @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索もwhereを使う
+      @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索
     end
   end
 
   def edit
     @post = Post.find(params[:id])
-    unless @post.user.id == current_user.id
+    unless @post.user == current_user
       redirect_to user_path alert: "他のユーザーの投稿は編集できません"
     end
   end
 
   def update
-    post = Post.find(params[:id])
+    @post = Post.find(params[:id])
     if @post.user == current_user
       if @post.update(post_params)
         redirect_to post_path(@post), notice: "投稿が更新されました"
@@ -48,6 +51,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
     if @post.user == current_user
       @post.destroy
       redirect_to posts_path, notice: "投稿が削除されました"
@@ -55,19 +59,11 @@ class PostsController < ApplicationController
       redirect_to posts_path, alert: "他のユーザーの投稿は削除できません"
     end
   end
-  def destroy
-    post = Post.find(params[:id])
-    if @user.id != current_user.id
-      redirect_to user_path(current_user) and return
-    end
-    post.destroy
-    redirect_to posts_path, notice: "投稿が削除されました"
-  end
 
   private
-  
+
   def post_params
     params.require(:post).permit(:body, :image)
   end
-  
+
 end

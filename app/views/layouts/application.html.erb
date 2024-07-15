@@ -33,6 +33,13 @@
               <li class="nav-item">
                 <%= link_to "マイページ", mypage_users_path, class: "nav-link text-light" %>
               </li>
+              <li class="nav-item">
+                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                  <%= f.text_field :body, class: "nav-link text-dark" %>
+                  <%= f.submit "検索", class: "btn btn-outline-success" %>
+                <% end %>
+              </li>
+              
               <% else %>
               <li class="nav-item">
                 <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light" %>
@@ -57,7 +64,6 @@
         <div class="row no-gutters">
           <div class="col-md-4">
             <p>編み物好きのためのSNS</p>
-            <!--画像あとで探す%= image_tag("logo-white.png") %>-->
           </div>
         </div>
       </div>

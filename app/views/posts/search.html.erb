@@ -1,0 +1,39 @@
+<h1><%= "「 #{params[:body]} 」の検索結果" %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>投稿内容</th>
+      <th>写真</th>
+      <th>投稿者</th>
+      <%# 不要な操作列は削除 %>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.body %></td>
+          <td>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, size: "100x100" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", size: "100x100" %>
+            <% end %>
+          </td>
+          <td><%= link_to post.user.name, user_path(post.user) %></td>
+          <td>
+            <% if post.user == current_user %>
+              <%= link_to "編集", edit_post_path(post) %>
+              <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4">検索結果が見つかりませんでした。</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

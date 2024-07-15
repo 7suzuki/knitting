@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get :mypage
     end
   end
+  get "/search", to: "posts#search"
 
   namespace :admin do
     resources :posts, only: [:index, :show, :destroy]
