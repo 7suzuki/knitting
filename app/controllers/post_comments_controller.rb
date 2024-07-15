@@ -6,6 +6,11 @@ class PostCommentsController < ApplicationController
     comment.save
     redirect_to post_path(post)
   end
+  
+  def destroy
+    PostComment.find(params[:id]).destroy
+    redirect_to post_path(params[:post_id])
+  end
 
   private
 
