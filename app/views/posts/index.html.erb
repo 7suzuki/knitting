@@ -1,5 +1,8 @@
-<h1>投稿一覧</h1>
-
+<% if params[:body].present? %>
+  <h1><%= "「 #{params[:body]} 」の検索結果" %></h1>
+<% else %>
+  <h1>投稿一覧</h1>
+<% end %>
 <table>
   <thead>
     <tr>

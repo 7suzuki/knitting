@@ -4,7 +4,7 @@
   <%= f.text_area :comment, autofocus: true %>
   <%= f.submit "変更を保存" %>
   <br/>
-  
+
   退会希望の場合は、退会ボタンを押してください。<br/>
   <%= link_to "退会", user_path(@user), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger btn-sm" %>
 <% end %>

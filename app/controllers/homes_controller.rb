@@ -1,4 +1,5 @@
-class HomesController < ApplicationController
+class HomesController < PublicController
+  skip_before_action :authenticate_user!
   def top
 
   end

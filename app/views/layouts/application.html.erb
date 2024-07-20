@@ -20,7 +20,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
+            <% if admin_user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_user_session_path, method: :delete, class: "nav-link text-light" %>
+              </li>
+            <% elsif user_signed_in? %>
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
@@ -34,13 +38,13 @@
                 <%= link_to "マイページ", mypage_users_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <%= form_with url: posts_path, method: :get, local: true do |f| %>
                   <%= f.text_field :body, class: "nav-link text-dark" %>
                   <%= f.submit "検索", class: "btn btn-outline-success" %>
                 <% end %>
               </li>
-              
-              <% else %>
+
+            <% else %>
               <li class="nav-item">
                 <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light" %>
               </li>

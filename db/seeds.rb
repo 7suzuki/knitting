@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+puts "データの作成を開始します"
+
+AdminUser.find_or_create_by!(email: ENV["ADMIN_USER_EMAIL"]) do |admin_user|
+  admin_user.password = ENV["ADMIN_USER_PASSWORD"]
+end
+
 taro = User.find_or_create_by!(email: "taro@example.com") do |user|
   user.password = "aiueoka"
   user.name = "taro"
@@ -17,3 +23,7 @@ hanako = User.find_or_create_by!(email: "hanako@example.com") do |user|
 end
 
 Post.find_or_create_by!(body: "aiueo", user: taro)
+
+puts "作成してあるデータ数: AdminUser: #{AdminUser.count}"
+
+puts "データの作成が完了しました"

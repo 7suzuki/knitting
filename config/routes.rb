@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :admins, controllers: {
-    sessions: "admins/sessions"
+  devise_for :admin_users, controllers: {
+    sessions: "admin_users/sessions"
   }
 
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
-  
+
   root to: "homes#top"
 
   resources :posts do
