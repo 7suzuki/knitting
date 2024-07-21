@@ -27,14 +27,6 @@ class PostsController < PublicController
     end
   end
 
-  def search
-    @posts = Post.all
-    if params[:body].present?
-      # @posts = @posts.where(body: params[:body]) # 完全一致
-      @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索
-    end
-  end
-
   def edit
     @post = Post.find(params[:id])
     unless @post.user == current_user
