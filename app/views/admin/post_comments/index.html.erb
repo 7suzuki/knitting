@@ -1,0 +1,26 @@
+<h1>全コメント一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>ステータス</th>
+      <th>コメント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @postComments.each do |post_comment| %>
+    <tr>
+      <td><%= post_comment.user.name %></td>
+      <td>
+        <% if post_comment.user.is_active %>
+          <span>入会</span>
+        <% else %>
+          <span>退会</span>
+        <% end %>
+      </td>
+      <td><%= post_comment.comment %></td>
+      <td><%= link_to "削除", admin_post_path(post_comment.user), method: :delete, data: { confirm: "本当に削除しますか？" } %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

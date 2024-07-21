@@ -1,6 +1,7 @@
 class Admin::UsersController < AdminController
   def index
     @users = User.all
+    @posts = Post.all
   end
 
   def show

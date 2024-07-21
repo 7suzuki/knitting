@@ -1,0 +1,40 @@
+<h1><%= @user.name %>詳細</h1>
+<%= @user.email %>
+<% if @user.is_active %>
+  <%= link_to "#{@user.name}を削除する", admin_user_path(@user), method: :delete, data: { confirm: "本当に退会させますか？" } %>
+<% else %>
+  <p>このユーザーは既に退会しています。</p>
+<% end %>
+
+<% if @posts.present? %>
+<table>
+  <thead>
+    <tr>
+      <th>内容</th>
+      <th>写真</th>
+      <th>コメント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.body %></td>
+        <td>
+          <% if post.image.attached? %>
+            <%= image_tag post.image, size: "100x100" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", size: "100x100" %>
+          <% end %>
+        </td>
+        <td><%= "#{post.post_comments.count} コメント" %></td>
+        <td>
+          <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>投稿がありません。</p>
+<% end %>
+

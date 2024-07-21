@@ -6,6 +6,7 @@ class Admin::PostsController < AdminController
 
   def index
     @posts = Post.all
+    @users = User.all
   end
 
   def destroy
