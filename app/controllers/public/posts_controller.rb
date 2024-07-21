@@ -1,4 +1,4 @@
-class PostsController < PublicController
+class Public::PostsController < PublicController
 
   def new
     @post = Post.new

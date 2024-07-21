@@ -8,24 +8,24 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
 
-  root to: "homes#top"
-
-  resources :posts do
-    resources :post_comments, only: [:create, :destroy]
-  end
-  resources :users, only: [:show, :edit, :update, :destroy] do
-    collection do #collectionだとidが不要
-      get :mypage
+  scope module: :public do
+    root to: "homes#top"
+    resources :posts do
+      resources :post_comments, only: [:create, :destroy]
     end
+    resources :users, only: [:show, :edit, :update, :destroy] do
+      collection do #collectionだとidが不要
+        get :mypage
+      end
+    end
+    get "/search", to: "posts#index"
   end
-  get "/search", to: "posts#search"
-
+  
   namespace :admin do
     resources :posts, only: [:index, :show, :destroy]
     resources :users, only: [:index, :show, :destroy] do
-      resources :comments, controller: :user_comments
+      resources :post_comments
     end
-
-    resources :comments
+    resources :post_comments
   end
 end

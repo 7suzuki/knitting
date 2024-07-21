@@ -1,4 +1,4 @@
-class UsersController < PublicController
+class Public::UsersController < PublicController
   before_action :authenticate_user!, only: [:mypage]
 
   def show
