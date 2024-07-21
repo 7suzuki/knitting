@@ -20,6 +20,15 @@ class Users::SessionsController < Devise::SessionsController
   # protected
 
   private
+  
+  def after_sign_in_path_for(resource)
+    mypage_users_url
+  end
+  
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+  
   # アクティブであるかを判断するメソッド
   def user_state
     # 【処理内容1】 入力されたemailからアカウントを1件取得

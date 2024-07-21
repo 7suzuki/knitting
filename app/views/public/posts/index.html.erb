@@ -15,7 +15,7 @@
     <% if @posts.present? %>
       <% @posts.each do |post| %>
         <tr>
-          <td><%= post.body %></td>
+          <td><%= link_to "#{post.body}", post_path(post.id) %></td>
           <td>
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "100x100" %>
@@ -24,7 +24,7 @@
             <% end %>
           </td>
           <td><%= link_to post.user.name, user_path(post.user) %></td>
-          <td><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
+          <td><%= "#{post.post_comments.count} コメント" %></td>
           <td>
             <% if post.user == current_user %>
               <%= link_to "編集", edit_post_path(post) %>
