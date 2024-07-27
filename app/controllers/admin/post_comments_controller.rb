@@ -1,12 +1,13 @@
 class Admin::PostCommentsController < AdminController
   
   def index
-    @postComments = PostComment.all
+    @post_comments = PostComment.all
   end
   
   def destroy
-    PostComment.find(params[:id]).destroy
-    redirect_to post_path(params[:post_id])
+    @post_comment = PostComment.find(params[:id])
+    @post_comment.destroy
+    redirect_to admin_post_comments_path, notice: "投稿が削除されました"
   end
 
 end

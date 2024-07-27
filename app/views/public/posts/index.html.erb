@@ -1,4 +1,7 @@
 <h1>投稿一覧</h1>
+<% if @search_error %>
+  <p><%= @search_error %></p>
+<% end %>
 <table>
   <thead>
     <tr>

@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    resources :posts, only: [:index, :show, :destroy]
+    resources :posts, only: [:index, :show, :destroy] do
+      resources :post_comments, only: [:index, :destroy]
+    end
     resources :users, only: [:index, :show, :destroy] do
       resources :post_comments, only: [:index, :destroy]
     end

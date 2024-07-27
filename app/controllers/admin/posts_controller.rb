@@ -11,11 +11,7 @@ class Admin::PostsController < AdminController
 
   def destroy
     @post = Post.find(params[:id])
-    if @post.user == current_user
-      @post.destroy
-      redirect_to posts_path, notice: "投稿が削除されました"
-    else
-      redirect_to posts_path, alert: "他のユーザーの投稿は削除できません"
-    end
+    @post.destroy
+    redirect_to admin_posts_path, notice: "投稿が削除されました"
   end
 end
