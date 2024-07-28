@@ -1,4 +1,6 @@
 class Public::PostsController < PublicController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :author_only!, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -20,42 +22,31 @@ class Public::PostsController < PublicController
   end
 
   def index
-    @posts = Post.all
-   if params[:body].present?
-    @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索
-   else
+    @posts = Post.all.joins(:user).where(users: { is_active: true })
+   if params[:body] == nil || params[:body] == ""
     @search_error = "検索の値をいれてください"
+   else
+    @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索
    end
   end
 
   def edit
     @post = Post.find(params[:id])
-    unless @post.user == current_user
-      redirect_to user_path alert: "他のユーザーの投稿は編集できません"
-    end
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.user == current_user
-      if @post.update(post_params)
-        redirect_to post_path(@post), notice: "投稿が更新されました"
-      else
-        render :edit
-      end
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "投稿が更新されました"
     else
-      redirect_to posts_path, alert: "他のユーザーの投稿は編集できません"
+      render :edit
     end
   end
 
   def destroy
     @post = Post.find(params[:id])
-    if @post.user == current_user
-      @post.destroy
-      redirect_to posts_path, notice: "投稿が削除されました"
-    else
-      redirect_to posts_path, alert: "他のユーザーの投稿は削除できません"
-    end
+    @post.destroy
+    redirect_to posts_path, notice: "投稿が削除されました"
   end
 
   private
@@ -64,4 +55,10 @@ class Public::PostsController < PublicController
     params.require(:post).permit(:body, :image)
   end
 
+  def author_only!
+    post = Post.find(params[:id])
+    if post.user != current_user
+      redirect_to posts_path, alert: "他のユーザーの投稿は編集できません"
+    end
+  end
 end

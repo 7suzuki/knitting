@@ -12,11 +12,9 @@
     <tr>
       <td><%= post_comment.user.name %></td>
       <td>
-        <% if post_comment.user.is_active %>
-          <span>入会</span>
-        <% else %>
-          <span>退会</span>
-        <% end %>
+        <span>
+          <%= post_comment.user.active_status %>
+        </span>
       </td>
       <td><%= post_comment.comment %></td>
       <td><%= link_to "削除",  admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, data: { confirm: "本当に削除しますか？" } %> </td>

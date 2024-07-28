@@ -14,11 +14,9 @@
     <tr>
       <td><%= post.user.name %></td>
       <td>
-        <% if post.user.is_active %>
-          <span>入会</span>
-        <% else %>
-          <span>退会</span>
-        <% end %>
+        <span>
+          <%= post.user.active_status %>
+        </span>
       </td>
       <td><%= post.body %></td>
       <td>
