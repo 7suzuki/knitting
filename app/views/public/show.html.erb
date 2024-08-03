@@ -2,7 +2,7 @@
 <%= @user.comment %>
 
 <!--ゲストページのとき編集できない＆マイページのとき編集できる-->
-<% if @user == current_user && !@user.guest_user? %>
+<% if @user == current_user && ! @user.guest_user? %>
   <%= link_to "マイページ編集", edit_user_path(current_user.id) %>
 <% end %>
 <br>
