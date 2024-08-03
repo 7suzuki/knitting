@@ -23,11 +23,11 @@ class Public::PostsController < PublicController
 
   def index
     @posts = Post.all.joins(:user).where(users: { is_active: true })
-   if params[:body] == nil || params[:body] == ""
-    @search_error = "検索の値をいれてください"
-   else
-    @posts = @posts.where("body LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:body].to_s)}%") # 曖昧検索
-   end
+    if params[:body] == nil || params[:body] == ""
+      @search_error = "検索の値をいれてください"
+    else
+      @posts = @posts.search_by_body(params[:body].to_s)
+    end
   end
 
   def edit

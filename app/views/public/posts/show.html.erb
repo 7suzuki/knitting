@@ -16,18 +16,22 @@
  <%= link_to "マイページ", mypage_users_path %>
 
 <div>
-  <% if @post.liked_by?(current_user) %>
-    <p>
-      <%= link_to post_like_path(@post), method: :delete do %>
-        ♥<%= @post.likes.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_like_path(@post), method: :post do %>
-        ♡<%= @post.likes.count %> いいね
-      <% end %>
-    </p>
+  <% if current_user == @post.user %>
+    <p>♥<%= @post.likes.count %> いいね</p>
+  <% else %>
+    <% if @post.liked_by?(current_user) %>
+      <p>
+        <%= link_to post_like_path(@post), method: :delete do %>
+          ♥<%= @post.likes.count %> いいね
+        <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to post_like_path(@post), method: :post do %>
+          ♡<%= @post.likes.count %> いいね
+        <% end %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 <div>

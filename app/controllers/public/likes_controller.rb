@@ -4,7 +4,9 @@ class Public::LikesController < PublicController
   def create
     post = Post.find(params[:post_id])
     like = current_user.likes.new(post_id: post.id)
-    like.save
+    unless like.save
+      flash[:alert] = like.errors.full_messages.join(", ")
+    end
     redirect_to post_path(post)
   end
 

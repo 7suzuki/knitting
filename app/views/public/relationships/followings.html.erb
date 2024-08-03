@@ -1,0 +1,6 @@
+<h2>フォローしいているユーザー</h2>
+<% if @users.exists? %>
+  <%= render "/users/index", users: @users %>
+<% else %>
+  <p>フォローしているユーザーはいません</p>
+<% end %>
