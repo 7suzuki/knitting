@@ -1,8 +1,8 @@
 <h1><%= @user.name %>さんのページ</h1>
 <%= @user.comment %>
 
-<!--マイページのとき編集できる-->
-<% if @user == current_user %>
+<!--ゲストページのとき編集できない＆マイページのとき編集できる-->
+<% if @user == current_user && !@user.guest_user? %>
   <%= link_to "マイページ編集", edit_user_path(current_user.id) %>
 <% end %>
 <br>

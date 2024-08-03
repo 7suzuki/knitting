@@ -1,10 +1,10 @@
 knittingは編み物の写真を投稿したり検索したりできるSNSです。
 
 <!--ゲストページ-->
+<br>
+ <%= link_to "ゲストログイン", users_guest_sign_in_path, class: "btn btn-outline-secondary", method: :post %>
 <!--一般ユーザー-->
 <br>
 <%= link_to "新規登録", new_user_registration_path, class: "btn sign_up btn-outline-info" %>
 <br>
 <%= link_to "ログイン", new_user_session_path, class: "btn sign_in btn-outline-info" %>
-<br>
-<%= link_to "管理者ログイン", admin_user_session_path, class: "btn sign_in btn-outline-dark" %>

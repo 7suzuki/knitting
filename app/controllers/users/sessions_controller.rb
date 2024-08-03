@@ -17,18 +17,23 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
-
-  private
+  
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to user_path(user), notice: "guestuserでログインしました。"
+  end
+  
+  protected
   
   def after_sign_in_path_for(resource)
     mypage_users_url
   end
-  
+
   def after_sign_out_path_for(resource)
     root_path
   end
-  
+
   # アクティブであるかを判断するメソッド
   def user_state
     # 【処理内容1】 入力されたemailからアカウントを1件取得
@@ -43,4 +48,6 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to root_path and return
     end
   end
+
+
 end
