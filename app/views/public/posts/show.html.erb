@@ -2,7 +2,7 @@
 
 <%= @post.body %>
 <% if @post.image.present? %>
-  <%= image_tag @post.image %>
+  <%= image_tag @post.image, size: "100x100" %>
   <% else %>
   <p></p>
 <% end %>
