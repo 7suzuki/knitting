@@ -16,13 +16,16 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     resources :posts do
-      resource :like, only: [:create, :destroy]
+      resource :like, only: [:index, :create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
     resources :users, only: [:show, :edit, :update, :destroy] do
       collection do #collectionだとidが不要
         get :mypage
       end
+      resource :relationships, only: [:create, :destroy]
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
     end
     get "/search", to: "posts#index"
   end

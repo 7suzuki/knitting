@@ -1,6 +1,8 @@
-<h2>フォロワーー</h2>
+<h2>フォロワー</h2>
 <% if @users.exists? %>
-  <%= render "/users/index", users: @users %>
+  <%= render "relationships", user: @user %>
 <% else %>
   <p>フォロワーはいません</p>
 <% end %>
+
+

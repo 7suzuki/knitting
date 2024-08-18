@@ -8,11 +8,16 @@
 <br>
 <%= link_to "投稿フォーム", new_post_path %>
 
-<!--実装フェーズ3で作成-->
 <!--いいね一覧-->
-<!--フォロー一覧-->
+<br>
+<%= link_to "いいね", user_followings_url(@user) %>
+<!--フォロー一覧へ画面遷移-->
+<br>
+<%= link_to "フォロー", user_followings_url(@user) %>
 <%= @user.followings.count %>
-<!--フォロワー一覧-->
+<!--フォロワー一覧へ画面遷移-->
+<%= link_to "フォロワー", user_followers_url(@user) %>
+<%= @user.followers.count %>
 
 
 <h2><%= @user.name %>さんの投稿一覧</h2>
