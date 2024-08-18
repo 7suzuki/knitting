@@ -11,4 +11,6 @@ module ApplicationHelper
     url = image.attached? ? image : "no_image.jpg"
     image_tag url, size: "100x100"
   end
+  
+  
 end
