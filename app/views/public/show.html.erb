@@ -1,6 +1,10 @@
 <h1><%= @user.name %>さんのページ</h1>
 <div class="alert alert-info" role="alert">
-  <%= @user.comment %>
+  <% if @user.guest_user? %>
+    <p>はじめまして。こんにちは。</p>
+  <% else %>
+    <%= @user.comment %>
+  <% end %>
   <!--ゲストページのとき編集できない＆マイページのとき編集できる-->
   <% if @user == current_user && ! @user.guest_user? %>
     <%= link_to edit_user_path(current_user.id) do %>

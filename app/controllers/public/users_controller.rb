@@ -1,6 +1,6 @@
 class Public::UsersController < PublicController
   before_action :authenticate_user!, only: [:mypage]
-   before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_guest_user, only: [:edit]
 
   def show
     @user = User.find(params[:id])
