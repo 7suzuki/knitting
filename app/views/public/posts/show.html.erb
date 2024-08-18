@@ -22,18 +22,21 @@
 
 <div>
   <% if current_user == @post.user %>
-    <p>♥<%= @post.likes.count %> いいね</p>
+    <i class="fa-solid fa-heart"></i>
+    <p><%= @post.likes.count %> いいね</p>
   <% else %>
     <% if @post.liked_by?(current_user) %>
       <p>
         <%= link_to post_like_path(@post), method: :delete do %>
-          ♥<%= @post.likes.count %> いいね
+          <i class="fa-solid fa-heart"></i>
+          <%= @post.likes.count %> いいね
         <% end %>
       </p>
       <% else %>
       <p>
         <%= link_to post_like_path(@post), method: :post do %>
-          ♡<%= @post.likes.count %> いいね
+          <i class="fa-regular fa-heart"></i>
+          <%= @post.likes.count %> いいね
         <% end %>
       </p>
     <% end %>

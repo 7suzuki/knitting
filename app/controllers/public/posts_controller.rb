@@ -23,9 +23,7 @@ class Public::PostsController < PublicController
 
   def index
     @posts = Post.all.joins(:user).where(users: { is_active: true })
-    if params[:body] == nil || params[:body] == ""
-      @search_error = "検索の値をいれてください"
-    else
+    if params[:body].present?
       @posts = @posts.search_by_body(params[:body].to_s)
     end
   end

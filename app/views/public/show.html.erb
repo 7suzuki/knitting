@@ -1,11 +1,13 @@
 <h1><%= @user.name %>さんのページ</h1>
-<%= @user.comment %>
-
-<!--ゲストページのとき編集できない＆マイページのとき編集できる-->
-<% if @user == current_user && ! @user.guest_user? %>
-  <%= link_to "マイページ編集", edit_user_path(current_user.id) %>
-<% end %>
-
+<div class="alert alert-info" role="alert">
+  <%= @user.comment %>
+  <!--ゲストページのとき編集できない＆マイページのとき編集できる-->
+  <% if @user == current_user && ! @user.guest_user? %>
+    <%= link_to edit_user_path(current_user.id) do %>
+      <i class="fa-solid fa-user-gear"></i>
+    <% end %>
+  <% end %>
+</div>
 <!--いいね一覧-->
 <br>
 <%= link_to "いいね一覧", user_like_url(@user) %>
@@ -18,7 +20,7 @@
 <%= @user.followers.count %>
 
 
-<h2><%= @user.name %>さんの投稿一覧</h2>
+<h2 class="mt-4"><%= @user.name %>さんの投稿一覧</h2>
 <table class="table">
   <thead>
     <tr>
