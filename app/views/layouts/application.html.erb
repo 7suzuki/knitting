@@ -66,10 +66,14 @@
       </nav>
     </header>
     <main class="mb-auto">
-      <% flash.each do |key, message| %>
-        <div class="flash <%= key %>"><%= message %></div>
-      <% end %>
-      <%= yield %>
+      <div class="container">
+        <div class="center-block">
+          <% flash.each do |key, message| %>
+            <div class="flash <%= key %>"><%= message %></div>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
     </main>
     <footer class="bg-dark text-white pt-5 pb-4">
       <div class="container">

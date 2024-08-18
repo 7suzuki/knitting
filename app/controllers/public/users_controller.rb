@@ -39,12 +39,16 @@ class Public::UsersController < PublicController
     reset_session #ログアウトさせる
     redirect_to root_path, notice: "退会しました"
   end
+  
+  def like
+    @user = User.find(params[:user_id])
+    likes = Like.where(user_id: @user.id).pluck(:post_id)
+    @like_posts = Post.find(likes)
+  end
 
   def user_params
     params.require(:user).permit(:name, :comment)
   end
-  
-  
   
   
   private

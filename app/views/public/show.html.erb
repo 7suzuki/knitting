@@ -5,12 +5,10 @@
 <% if @user == current_user && ! @user.guest_user? %>
   <%= link_to "マイページ編集", edit_user_path(current_user.id) %>
 <% end %>
-<br>
-<%= link_to "投稿フォーム", new_post_path %>
 
 <!--いいね一覧-->
 <br>
-<%= link_to "いいね", user_followings_url(@user) %>
+<%= link_to "いいね一覧", user_like_url(@user) %>
 <!--フォロー一覧へ画面遷移-->
 <br>
 <%= link_to "フォロー", user_followings_url(@user) %>
@@ -21,7 +19,7 @@
 
 
 <h2><%= @user.name %>さんの投稿一覧</h2>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>内容</th>
