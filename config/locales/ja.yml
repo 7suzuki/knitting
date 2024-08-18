@@ -33,4 +33,15 @@ ja:
   activerecord:
     attributes:
       post:
-        body: 本文
+        body: "本文"
+    errors:
+      models:
+        post:
+          attributes:
+            body:
+              blank: "入力してください"
+
+  devise:
+    sessions:
+      signed_out: "サインアウトしました。"
+
