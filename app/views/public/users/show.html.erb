@@ -6,21 +6,21 @@
     <%= @user.comment %>
   <% end %>
   <!--ゲストページのとき編集できない＆マイページのとき編集できる-->
-  <% if @user == current_user && ! @user.guest_user? %>
-    <%= link_to edit_user_path(current_user.id) do %>
+  <% if @user == current_user && !@user.guest_user? %>
+    <%= link_to edit_user_registration_path do %>
       <i class="fa-solid fa-user-gear"></i>
     <% end %>
   <% end %>
 </div>
 
 <br>
-<%= link_to "いいね一覧", user_like_url(@user) %>
+<%= link_to "いいね一覧", user_like_path(@user) %>
 <!--フォロー一覧へ画面遷移-->
 <br>
-<%= link_to "フォロー", user_followings_url(@user) %>
+<%= link_to "フォロー", user_followings_path(@user) %>
 <%= @user.followings.count %>
 <!--フォロワー一覧へ画面遷移-->
-<%= link_to "フォロワー", user_followers_url(@user) %>
+<%= link_to "フォロワー", user_followers_path(@user) %>
 <%= @user.followers.count %>
 
 

@@ -1,8 +1,9 @@
 class User < ApplicationRecord
+  GUEST_USER_EMAIL = "guest@example.com"
+
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, authentication_keys: [:name]
+  # :recoverable. :rememberable, :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :validatable, authentication_keys: [:name]
 
   has_many :posts
   has_many :post_comments, dependent: :destroy
@@ -19,8 +20,6 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
-
-  GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
@@ -52,7 +51,5 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-
-
 end
 

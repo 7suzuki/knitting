@@ -12,6 +12,7 @@
       <th></th>
     </tr>
   </thead>
+  
   <tbody>
     <% if params[:body].present? && @posts.present? %>
       <h1>「 <%= params[:body] %> 」の検索結果</h1>
@@ -37,7 +38,7 @@
       <% end %>
     <% else %>
       <tr>
-        <td colspan="5">
+        <td>
           <% if params[:body].present? %>
             検索結果が見つかりませんでした。
           <% else %>

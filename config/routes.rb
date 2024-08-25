@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, controllers: {
-    sessions: "admin_users/sessions"
+  devise_for :admin_users, skip: [:registrations], controllers: {
+    sessions: "admin_users/sessions",
   }
 
   devise_for :users, controllers: {
     registrations: "users/registrations",
-    sessions: "users/sessions"
+    sessions: "users/sessions",
   }
 
   devise_scope :user do
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       resource :like, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
-    resources :users, only: [:show, :edit, :update, :destroy] do
+    resources :users, only: [:show] do
       collection do #collectionだとidが不要
         get :mypage
       end
@@ -27,10 +27,8 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
-
-      get "like", to: "users#like", as: "like"
+      get :like
     end
-    get "/search", to: "posts#index"
   end
 
   namespace :admin do

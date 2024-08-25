@@ -8,11 +8,11 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration[6.1]
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
-      t.string   :reset_password_token
-      t.datetime :reset_password_sent_at
+      # t.string   :reset_password_token
+      # t.datetime :reset_password_sent_at
 
       ## Rememberable
-      t.datetime :remember_created_at
+      # t.datetime :remember_created_at
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
@@ -37,7 +37,7 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration[6.1]
     end
 
     add_index :admin_users, :email,                unique: true
-    add_index :admin_users, :reset_password_token, unique: true
+    # add_index :admin_users, :reset_password_token, unique: true
     # add_index :admin_users, :confirmation_token,   unique: true
     # add_index :admin_users, :unlock_token,         unique: true
   end

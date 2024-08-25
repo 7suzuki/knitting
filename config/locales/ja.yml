@@ -40,8 +40,13 @@ ja:
           attributes:
             body:
               blank: "入力してください"
+              too_short: "本文が短すぎます。最小 %{count} 文字が必要です。"
 
   devise:
     sessions:
       signed_out: "サインアウトしました。"
 
+  errors:
+    messages:
+      not_saved: "保存できませんでした。"
+      too_short: "文字数が足りません。"

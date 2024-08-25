@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :ensure_guest_user, only: [:edit, :update, :destroy]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -16,17 +17,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
+    @user = current_user
   end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to mypage_users_path notice: "プロフィールが更新されました"
+    else
+      flash.now[:alert] = "プロフィールの更新に失敗しました"
+      render :edit
+    end
+  end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    user = current_user
+    user.update!(is_active: false)
+    reset_session #ログアウトさせる
+    redirect_to root_path, notice: "退会しました"
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -58,10 +69,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  
+
   private
-  
+
   def after_sign_in_path_for(resource)
     mypage_users_url
+  end
+
+  def user_params
+    params.require(:user).permit(:comment)
+  end
+
+  def ensure_guest_user
+    if current_user.guest_user?
+      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
   end
 end
