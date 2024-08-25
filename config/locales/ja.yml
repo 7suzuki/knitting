@@ -44,9 +44,22 @@ ja:
 
   devise:
     sessions:
+      signed_in: "ログインしました。"
       signed_out: "サインアウトしました。"
+    failures:
+      user:
+        not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+    registrations:
+      signed_up: "アカウントを作成しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
 
   errors:
     messages:
       not_saved: "保存できませんでした。"
       too_short: "文字数が足りません。"
+      confirmation: "確認が一致しません"
+    attributes:
+      password_confirmation:
+        confirmation: "パスワードの確認が一致しません"

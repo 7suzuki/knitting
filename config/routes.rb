@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
     end
     resources :users, only: [:show] do
-      collection do #collectionだとidが不要
+      collection do
         get :mypage
       end
 
