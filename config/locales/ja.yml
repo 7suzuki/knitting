@@ -46,10 +46,12 @@ ja:
     sessions:
       signed_in: "ログインしました。"
       signed_out: "サインアウトしました。"
-    failures:
+    failure:
       user:
         not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
-      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      admin_user:
+        invalid: "管理者アカウントまたはパスワードが無効です。"
+      invalid: "無効な認証情報です。"
     registrations:
       signed_up: "アカウントを作成しました。"
       updated: "アカウント情報を更新しました。"
