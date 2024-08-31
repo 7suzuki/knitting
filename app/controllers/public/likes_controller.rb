@@ -3,17 +3,16 @@ class Public::LikesController < PublicController
 
   def create
     post = Post.find(params[:post_id])
-    like = current_user.likes.new(post_id: post.id)
-    unless like.save
-      flash[:alert] = like.errors.full_messages.join(", ")
-    end
+    current_user.likes.create!(post_id: post.id)
     redirect_to post_path(post)
   end
 
   def destroy
     post = Post.find(params[:post_id])
-    like = current_user.likes.find_by(post_id: post.id)
-    like.destroy
+    like = current_user.likes.find_by(post_id: 100)
+    if like.present?
+      like.destroy
+    end
     redirect_to post_path(post)
   end
 end

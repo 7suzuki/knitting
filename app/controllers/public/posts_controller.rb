@@ -7,22 +7,21 @@ class Public::PostsController < PublicController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post)
     else
       render :new
     end
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.active_user_only.find(params[:id])
     @post_comment = PostComment.new
   end
 
   def index
-    @posts = Post.all.joins(:user).where(users: { is_active: true })
+    @posts = Post.all.active_user_only.includes(:user).left_joins(:post_comments).group("posts.id").select("COUNT(post_comments.id) AS post_comment_count", "posts.*")
     if params[:body].present?
       @posts = @posts.search_by_body(params[:body].to_s)
     end

@@ -41,7 +41,11 @@ ja:
             body:
               blank: "入力してください"
               too_short: "本文が短すぎます。最小 %{count} 文字が必要です。"
-
+        user:
+          attributes:
+            email:
+              taken: "このメールアドレスは既に使用されています。"
+          taken: "この値は既に使用されています。"
   devise:
     sessions:
       signed_in: "ログインしました。"
@@ -62,6 +66,9 @@ ja:
       not_saved: "保存できませんでした。"
       too_short: "文字数が足りません。"
       confirmation: "確認が一致しません"
+      taken: "この値は既に使用されています。"
     attributes:
       password_confirmation:
         confirmation: "パスワードの確認が一致しません"
+      email:
+        taken: "このメールアドレスは既に使用されています。"

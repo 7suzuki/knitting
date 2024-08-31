@@ -12,7 +12,7 @@
       <th></th>
     </tr>
   </thead>
-  
+
   <tbody>
     <% if params[:body].present? && @posts.present? %>
       <h1>「 <%= params[:body] %> 」の検索結果</h1>
@@ -25,7 +25,7 @@
             <%= post_image_or_default(post.image) %>
           </td>
           <td><%= link_to post.user.name, user_path(post.user) %></td>
-          <td><%= "#{post.post_comments.count} コメント" %></td>
+          <td><%= "#{post.post_comment_count} コメント" %></td>
           <td>
             <% if post.user == current_user %>
               <%= link_to "編集", edit_post_path(post) %>
