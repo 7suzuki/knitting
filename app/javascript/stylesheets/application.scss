@@ -6,3 +6,9 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.main-container {
+  background-color: rgba(255, 255, 255, 0.3); /* 背景色を白色で30%の透明度に設定 */
+  padding: 20px;
+  border-radius: 8px; /* 角を丸める */
+}
