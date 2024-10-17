@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
     end
     resources :users, only: [:show] do
-      collection do
+      collection do #collectionだとidが不要
         get :mypage
       end
 
@@ -36,8 +36,12 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:index, :destroy]
     end
     resources :users, only: [:index, :show, :destroy] do
+      member do
+        patch :reactivate  # ユーザーの再有効化を行うためのルートを追加
+      end
       resources :post_comments, only: [:index, :destroy]
     end
     resources :post_comments, only: [:index, :destroy]
   end
+
 end

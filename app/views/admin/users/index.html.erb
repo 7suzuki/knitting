@@ -5,6 +5,7 @@
       <th>name</th>
       <th>email</th>
       <th>ステータス</th>
+      <th>処理</th>
     </tr>
   </thead>
   <tbody>
@@ -15,9 +16,15 @@
         <td>
           <% if user.is_active %>
             <span>入会</span>
-            <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に退会させますか？" } %> 
           <% else %>
             <span>退会</span>
+          <% end %>
+        </td>
+        <td>
+          <% if user.is_active %>
+            <%= link_to "退会させる", admin_user_path(user), method: :delete, data: { confirm: "本当に退会させますか？" }, class: "btn btn-info" %>
+          <% else %>
+            <%= link_to "有効に戻す", reactivate_admin_user_path(user), method: :patch, data: { confirm: "本当に有効にしますか？" }, class: "btn btn-success" %>
           <% end %>
         </td>
       </tr>
