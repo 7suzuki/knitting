@@ -22,6 +22,9 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 2, maximum: 20 }
   
+  scope :search_by_name, -> (name) { where("name LIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(name)}%") } # 曖昧検索
+  scope :active_user_only, -> { where(is_active: true) }
+  
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -52,5 +55,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+  
+  
 end
 

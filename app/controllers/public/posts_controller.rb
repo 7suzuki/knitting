@@ -22,8 +22,10 @@ class Public::PostsController < PublicController
 
   def index
     @posts = Post.all.active_user_only.includes(:user).left_joins(:post_comments).group("posts.id").select("COUNT(post_comments.id) AS post_comment_count", "posts.*")
-    if params[:body].present?
-      @posts = @posts.search_by_body(params[:body].to_s)
+    if params[:search_type] == "user" && params[:query].present?
+      @users = User.active_user_only.search_by_name(params[:query].to_s)
+    elsif params[:search_type] == "comment" && params[:query].present?
+      @posts = @posts.search_by_body(params[:query].to_s)
     end
   end
 

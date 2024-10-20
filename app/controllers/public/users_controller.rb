@@ -17,4 +17,3 @@ class Public::UsersController < PublicController
     @like_posts = @user.liked_posts
   end
 end
-

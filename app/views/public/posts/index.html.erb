@@ -1,7 +1,9 @@
 <h1>投稿一覧</h1>
-<% if params[:body] == "" %>
+
+<% if params[:query].blank? %>
   <p>検索の値をいれてください</p>
 <% end %>
+
 <table class="table">
   <thead>
     <tr>
@@ -13,38 +15,74 @@
     </tr>
   </thead>
   <tbody>
-    <% if params[:body].present? && @posts.present? %>
-      <h1>「 <%= params[:body] %> 」の検索結果</h1>
-    <% end %>
-    <% if @posts.present? %>
-      <% @posts.each do |post| %>
+    <% if params[:query].present? %>
+      <h1>「 <%= params[:query] %> 」の検索結果</h1>
+
+      <!-- 検索タイプがユーザーの場合 -->
+      <% if params[:search_type] == "user" %>
+        <% if @users.present? %>
+          <% @users.each do |user| %>
+            <tr>
+              <td colspan="4"><%= link_to user.name, user_path(user) %></td>
+              <td><%= follow_btn(user) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5">該当するユーザーが見つかりませんでした。</td>
+          </tr>
+        <% end %>
+
+      <!-- 検索タイプがコメントの場合 -->
+      <% elsif params[:search_type] == "comment" %>
+        <% if @posts.present? %>
+          <% @posts.each do |post| %>
+            <tr>
+              <td><%= link_to post.body, post_path(post.id) %></td>
+              <td><%= post_image_or_default(post.image) %></td>
+              <td><%= link_to post.user.name, user_path(post.user) %></td>
+              <td><%= "#{post.post_comment_count} コメント" %></td>
+              <td>
+                <% if post.user == current_user %>
+                  <%= link_to "編集", edit_post_path(post) %>
+                  <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                <% else %>
+                  <%= follow_btn(post.user) %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5">該当するコメントが見つかりませんでした。</td>
+          </tr>
+        <% end %>
+      <% end %>
+      
+    <% else %>
+      <!-- 検索していない場合の投稿一覧 -->
+      <% if @posts.present? %>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= link_to post.body, post_path(post.id) %></td>
+            <td><%= post_image_or_default(post.image) %></td>
+            <td><%= link_to post.user.name, user_path(post.user) %></td>
+            <td><%= "#{post.post_comment_count} コメント" %></td>
+            <td>
+              <% if post.user == current_user %>
+                <%= link_to "編集", edit_post_path(post) %>
+                <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+              <% else %>
+                <%= follow_btn(post.user) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
         <tr>
-          <td><%= link_to "#{post.body}", post_path(post.id) %></td>
-          <td>
-            <%= post_image_or_default(post.image) %>
-          </td>
-          <td><%= link_to post.user.name, user_path(post.user) %></td>
-          <td><%= "#{post.post_comment_count} コメント" %></td>
-          <td>
-            <% if post.user == current_user %>
-              <%= link_to "編集", edit_post_path(post) %>
-              <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-            <% else %>
-              <%= follow_btn(post.user) %>
-            <% end %>
-          </td>
+          <td colspan="5">投稿がありません。</td>
         </tr>
       <% end %>
-    <% else %>
-      <tr>
-        <td>
-          <% if params[:body].present? %>
-            検索結果が見つかりませんでした。
-          <% else %>
-            投稿がありません。
-          <% end %>
-        </td>
-      </tr>
     <% end %>
   </tbody>
 </table>
