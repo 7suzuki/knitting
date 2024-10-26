@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+    resources :notifications, only: [:update]
     resources :posts do
       resource :like, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
