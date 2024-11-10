@@ -35,6 +35,6 @@
   * https://o-dan.net/ja/
 
   ## 実装機能リスト
-  https://docs.google.com/spreadsheets/d/1gEx18viin-BCJhFmOFTrC_i2zNDiah65akE6W2AcKDg/edit?usp=sharing
+  * https://docs.google.com/spreadsheets/d/1gEx18viin-BCJhFmOFTrC_i2zNDiah65akE6W2AcKDg/edit?gid=1898975908#gid=1898975908
   
   
