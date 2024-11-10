@@ -32,7 +32,7 @@
   * フロントエンド技術: HTML/CSS,Sass,Bootstrap,Javascript,Jquery
   
   ## 使用素材
-  後ほど作成予定
+  * https://o-dan.net/ja/
 
   ## 実装機能リスト
   https://docs.google.com/spreadsheets/d/1gEx18viin-BCJhFmOFTrC_i2zNDiah65akE6W2AcKDg/edit?usp=sharing
