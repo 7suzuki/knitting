@@ -29,7 +29,7 @@
   * 本番環境: EC2(AWS)
   * データベース: RDS(AWS),My SQL
   * 言語・フレームワーク:Ruby,	Ruby on Rails
-  * フロントエンド技術: HTML/CSS,Sass,Bootstrap,Javascript,Jquery
+  * フロントエンド技術: HTML/CSS,Bootstrap,Javascript
   
   ## 使用素材
   * https://o-dan.net/ja/
